@@ -2,31 +2,62 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package card;
 
-/**
- * A class that fills a magic hand of 7 cards with random Card Objects
- * and then asks the user to pick a card and searches the array of cards
- * for the match to the user's card. To be used as starting code in ICE 1
- * @author srinivsi
- */
+package card;
+ 
+
+import java.util.Scanner;
+import java.util.Random;
+
 public class CardTrick {
-    
-    public static void main(String[] args)
-    {
-        Card[] magicHand = new Card[7];
-        
-        for (int i=0; i<magicHand.length; i++)
-        {
-            Card c = new Card();
-            //c.setValue(insert call to random number generator here)
-            //c.setSuit(Card.SUITS[insert call to random number between 0-3 here])
+    private static final int HAND_SIZE = 7;
+    private static final String[] suits = { "Hearts", "Diamonds", "Clubs", "Spades" };
+    private static final String[] ranks = { "Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King" };
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        // Generate a random hand of cards
+        String[] magicHand = generateRandomHand();
+
+        // Ask the user for card value (1-13) and suit (1-4)
+        System.out.print("Enter the card value (1-13): ");
+        int cardValue = input.nextInt();
+        System.out.print("Enter the suit (0-3 in which 0 is hearts,1 is diamond, 2 is clubs, 3 is spades): ");
+        int suitValue = input.nextInt();
+
+        // Convert user input to array indices
+        int rankIndex = cardValue - 1; // Adjust for 0-based indexing
+        int suitIndex = suitValue - 1; // Adjust for 0-based indexing
+
+        // Create the user's card
+        String userCard = ranks[rankIndex] + " of " + suits[suitIndex];
+
+        // Search the array for the user's card
+        if (isCardInHand(userCard, magicHand)) {
+            System.out.println("Congratulations! Your card is in the magic hand!");
+        } else {
+            System.out.println("Sorry, your card is not in the magic hand. Have a good luck next time!");
         }
-        
-        //insert code to ask the user for Card value and suit, create their card
-        // and search magicHand here
-        //Then report the result here
-        // add one luckcard hard code 2,clubs
     }
-    
+
+    private static String[] generateRandomHand() {
+        Random random = new Random();
+        String[] hand = new String[HAND_SIZE];
+        for (int i = 0; i < HAND_SIZE; i++) {
+            String randomSuit = suits[random.nextInt(suits.length)];
+            String randomRank = ranks[random.nextInt(ranks.length)];
+            hand[i] = randomRank + " of " + randomSuit;
+        }
+        return hand;
+    }
+
+    private static boolean isCardInHand(String userCard, String[] magicHand) {
+        for (String card : magicHand) {
+            if (card.equalsIgnoreCase(userCard)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
