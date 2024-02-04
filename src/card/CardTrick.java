@@ -4,7 +4,7 @@
  */
 
 //Name :Jashanpreet singh Bedi  Student id: 991715257  Exercise-1
-
+//IN Class search the randomly generated array of 7 cards and search for lucky card if it is there it print win otherwise loose
 package card;
  
 
@@ -45,6 +45,7 @@ public class CardTrick {
         }
     }
 
+    
     private static String[] generateRandomHand() {
         Random random = new Random();
         String[] hand = new String[HAND_SIZE];
