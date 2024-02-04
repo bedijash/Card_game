@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
+
+
 package card;
  
 
@@ -17,23 +19,25 @@ public class CardTrick {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
-        // Generate a random hand of cards
+        
         String[] magicHand = generateRandomHand();
-
-        // Ask the user for card value (1-13) and suit (1-4)
+        String luckyRank = "8";  
+        String luckySuit = "Spades"; 
+        String luckyCard = luckyRank + " of " + luckySuit;
+         
         System.out.print("Enter the card value (1-13): ");
         int cardValue = input.nextInt();
         System.out.print("Enter the suit (0-3 in which 0 is hearts,1 is diamond, 2 is clubs, 3 is spades): ");
         int suitValue = input.nextInt();
 
-        // Convert user input to array indices
-        int rankIndex = cardValue - 1; // Adjust for 0-based indexing
-        int suitIndex = suitValue - 1; // Adjust for 0-based indexing
+       
+        int rankIndex = cardValue - 1;  
+        int suitIndex = suitValue - 1;  
 
-        // Create the user's card
+         
         String userCard = ranks[rankIndex] + " of " + suits[suitIndex];
 
-        // Search the array for the user's card
+         
         if (isCardInHand(userCard, magicHand)) {
             System.out.println("Congratulations! Your card is in the magic hand!");
         } else {
